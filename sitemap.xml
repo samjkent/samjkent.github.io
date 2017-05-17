@@ -3,36 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://www.samkent.xyz/reactive-lighting-installation/</loc>
+    <loc>http://samjkent.github.io/reactive-lighting-installation/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.samkent.xyz/categories/audio/</loc>
-    <lastmod>2017-05-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.samkent.xyz/categories/</loc>
+    <loc>http://samjkent.github.io/categories/audio/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.samkent.xyz/categories/electronics/</loc>
+    <loc>http://samjkent.github.io/categories/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.samkent.xyz/post/</loc>
+    <loc>http://samjkent.github.io/categories/electronics/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.samkent.xyz/</loc>
+    <loc>http://samjkent.github.io/post/</loc>
+    <lastmod>2017-05-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://samjkent.github.io/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
