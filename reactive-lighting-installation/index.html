@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Reactive Lighting Installation &middot; Sam Kent</title>
+
+  
+  <link rel="stylesheet" href="/css/poole.css">
+  <link rel="stylesheet" href="/css/hyde.css">
+  <link rel="stylesheet" href="/css/poole-overrides.css">
+  <link rel="stylesheet" href="/css/hyde-overrides.css">
+  <link rel="stylesheet" href="/css/hyde-x.css">
+  <link rel="stylesheet" href="/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+  <link href="/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Designing and building an audio reactive lighting installation with two students from Leeds College of Music">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+        <img src="/images/me.png" title="Sam Kent">
+      <h1>Sam Kent</h1>
+      <p class="lead">Electronic Engineering MEng</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="/">Projects</a></li>
+      
+      <li class="sidebar-nav-item"><a href="localhost/localhost/samkent.pdf">CV</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/samjkent"><i class="fa fa-github-square fa-3x"></i></a>
+      
+      
+      <a href="https://www.linkedin.com/in/samjohnkent/"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+
+    <p class="smallText">Copyright &copy; 2017 <a href="/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">Reactive Lighting Installation</h1>
+    <span class="post-date">May 5, 2017 &middot; 2 minute read
+    
+    <br/>
+    <a class="label" href="/categories/electronics">Electronics</a><a class="label" href="/categories/audio">Audio</a>
+    </span>
+
+
+    
+         <div class="ytcontainer">
+            <iframe src="//www.youtube.com/embed/yov_2pZkXRQ" frameborder="0" allowfullscreen class="ytvideo"></iframe>
+        </div>	
+    
+
+    <p>Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at Hyde Park Book Club (Leeds).</p>
+
+<p>The project consists of:</p>
+
+<ul>
+<li>A <a href="https://processing.org">Processing</a> application</li>
+<li>Arduino</li>
+<li>300 WS2812B LEDs</li>
+<li>100 2L Plastic Bottles</li>
+</ul>
+
+<p>The Processing application creates an audio input stream and sets the framerate to 100 FPS.
+The application&rsquo;s <code>draw</code> function runs an FFT with 512 bins on the input stream and stores the result. The <code>updateTube</code> function is called for every tube to configure the frequency response, colour, and sensitivity of each tube and to draw a visual representation of the tube on the GUI.</p>
+
+<p>The data is transferred to the microcontroller using a USB serial connection. A <code>serialEvent</code> is used to send the data whenever the application recives a serial interrupt, allowing the microcontroller to request the most up to date data whenever it is ready to refresh the LEDs.</p>
+
+<pre><code class="language-C">
+float updateTube(int n, int fLB, int fUB, color colour, float gain){
+  
+  if(fUB &lt; fLB){
+    print(&quot;Error: fUB is smaller than fLB&quot;);
+    return 0.0;
+  }
+  
+  // Convert f to bins
+  float fPerBin = 20000/bands;
+  int fLBBin = ceil(fLB/fPerBin);
+  int fUBBin = ceil(fUB/fPerBin);
+  
+  float binAvg = 0;
+  
+  // Get average of bins
+  for(int i = fLBBin; i &lt;= fUBBin; i++){
+    binAvg = binAvg + spectrum[i];
+  }
+  
+  float binMag = (binAvg/(fUBBin-fLBBin+1));
+  binMag = binMag * globalGain * gain;
+  
+  // avg out
+  float alpha = 0.595;
+  binMag = (1-alpha) * tubeValues[n] + alpha * binMag;
+
+  float binMult = binMag/255.0;
+  if(binMult &gt; 1) binMult = 1;
+  byte binMag_byte = (byte)floor(0xFF * binMult);
+  
+  if(binMag_byte == 0xFF) binMag_byte = (byte)0xFE;
+  tubeVals[n] = binMag_byte;
+  return binMag;
+}
+
+</code></pre>
+
+<p>Initially 25 tubes were built and arranged in a 5x5 grid: outer ring blue and high frequncies, middle ring yellow and mid range frequencies, center tube red and sub 90 Hz. The average magnitude of the bins that span each tube&rsquo;s frequency range is used to modulate the brightness (V of HSV colour) to pulse in time with the transients.</p>
+
+  </div>
+  
+</div>
+
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+
