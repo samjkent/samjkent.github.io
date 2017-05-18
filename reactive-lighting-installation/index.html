@@ -101,7 +101,7 @@
 <p>The Processing application creates an audio input stream and sets the framerate to 100 FPS.
 The application&rsquo;s <code>draw</code> function runs an FFT with 512 bins on the input stream and stores the result. The <code>updateTube</code> function is called for every tube to configure the frequency response, colour, and sensitivity of each tube and to draw a visual representation of the tube on the GUI.</p>
 
-<p>The data is transferred to the microcontroller using a USB serial connection. A <code>serialEvent</code> is used to send the data whenever the application recives a serial interrupt, allowing the microcontroller to request the most up to date data whenever it is ready to refresh the LEDs.</p>
+<p><img src="/post/reactive-lighting-installation/gui.png" alt="Tube Processor GUI" /></p>
 
 <pre><code class="language-C">
 float updateTube(int n, int fLB, int fUB, color colour, float gain){
@@ -141,7 +141,24 @@ float updateTube(int n, int fLB, int fUB, color colour, float gain){
 
 </code></pre>
 
+<p>The data is transferred to the microcontroller using a USB serial connection. A <code>serialEvent</code> is used to send the data whenever the application recives a serial interrupt, allowing the microcontroller to request the most up to date data whenever it is ready to refresh the LEDs.</p>
+
+<pre><code class="language-C">requestData();
+
+if(Serial.available() &gt; 0){
+    Serial.readBytes(byteBuffer, NUM_TUBES);
+    for(int i = 0; i &lt; NUM_TUBES; i++){
+        unsigned int brightness = (unsigned int)byteBuffer[i];
+        brightness = brightness * 2;
+        if(brightness &gt; 255) brightness = 255; 
+        hsv_vals[i][2] = brightness; // Update brightness
+    }            
+}
+</code></pre>
+
 <p>Initially 25 tubes were built and arranged in a 5x5 grid: outer ring blue and high frequncies, middle ring yellow and mid range frequencies, center tube red and sub 90 Hz. The average magnitude of the bins that span each tube&rsquo;s frequency range is used to modulate the brightness (V of HSV colour) to pulse in time with the transients.</p>
+
+<p><img src="/post/reactive-lighting-installation/hpbc.png" alt="Tube Processor GUI" /></p>
 
   </div>
   
