@@ -87,7 +87,7 @@
         </div>	
     
 
-    <p>Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at Hyde Park Book Club (Leeds).</p>
+    <p>Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at Hyde Park Book Club (Leeds) as part of <a href="http://www.leedsdigitalfestival.org/float-spectrum-audio-visual-installation/">Leeds Digital Festival</a>.</p>
 
 <p>The project consists of:</p>
 
@@ -99,7 +99,7 @@
 </ul>
 
 <p>The Processing application creates an audio input stream and sets the framerate to 100 FPS.
-The application&rsquo;s <code>draw</code> function runs an FFT with 512 bins on the input stream and stores the result. The <code>updateTube</code> function is called for every tube to configure the frequency response, colour, and sensitivity of each tube and to draw a visual representation of the tube on the GUI.</p>
+The application&rsquo;s <code>draw</code> function runs an FFT with 512 bins on the input stream and stores the result. The <code>updateTube</code> function is called each frame to configure each tube&rsquo;s frequency response, colour, and sensitivity and then calculates the resulting brightness of each tube and draws a visual representation of the tube on the GUI.</p>
 
 <p><img src="/post/reactive-lighting-installation/gui.png" alt="Tube Processor GUI" /></p>
 
@@ -141,7 +141,7 @@ float updateTube(int n, int fLB, int fUB, color colour, float gain){
 
 </code></pre>
 
-<p>The data is transferred to the microcontroller using a USB serial connection. A <code>serialEvent</code> is used to send the data whenever the application recives a serial interrupt, allowing the microcontroller to request the most up to date data whenever it is ready to refresh the LEDs.</p>
+<p>The data is transferred to the microcontroller using a USB serial connection. A <code>serialEvent</code> is used to send the data (<code>tubeVals</code> array) whenever the Processing application recives a serial interrupt, allowing the microcontroller to request the most up to date data whenever it is ready to refresh the LEDs.</p>
 
 <pre><code class="language-C">requestData();
 
@@ -156,7 +156,7 @@ if(Serial.available() &gt; 0){
 }
 </code></pre>
 
-<p>Initially 25 tubes were built and arranged in a 5x5 grid: outer ring blue, high frequencies; middle ring yellow, mid range frequencies; center tube red and sub 90 Hz. The average magnitude of the frequency bins that span each tubes response is used to modulate the brightness (V of each HSV colour) to pulse the tube in time with the transients.</p>
+<p>Initially 25 tubes were built and arranged in a 5x5 grid: outer ring blue, high frequencies; middle ring yellow, mid range frequencies; center tube red, low frequencies . The average magnitude of the frequency bins that span each tubes response is used to modulate the brightness (V of each HSV colour) to pulse the tube in time with the audio&rsquo;s transients.</p>
 
 <p><img src="/post/reactive-lighting-installation/hpbc.png" alt="Tube Processor GUI" /></p>
 
