@@ -74,7 +74,7 @@
 <div class="content container">
   <div class="post">
     <h1 class="post-title">Reactive Lighting Installation</h1>
-    <span class="post-date">May 5, 2017 &middot; 2 minute read &middot; <a href="https://github.com/samjkent/https://github.com/samjkent"><i class="fa fa-github-square"> View Source</i></a> 
+    <span class="post-date">May 5, 2017 &middot; 2 minute read &middot; <a href="https://github.com/samjkent/Float-Spectrum"><i class="fa fa-github-square"></i></a> 
     
     <br/>
     <a class="label" href="https://www.samkent.xyz/categories/electronics">Electronics</a><a class="label" href="https://www.samkent.xyz/categories/audio">Audio</a>
@@ -87,9 +87,7 @@
         </div>	
     
 
-    
-
-<p>Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at Hyde Park Book Club (Leeds) as part of <a href="http://www.leedsdigitalfestival.org/float-spectrum-audio-visual-installation/">Leeds Digital Festival</a>.</p>
+    <p>Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at Hyde Park Book Club (Leeds) as part of <a href="http://www.leedsdigitalfestival.org/float-spectrum-audio-visual-installation/">Leeds Digital Festival</a>.</p>
 
 <p>The project consists of:</p>
 
@@ -104,8 +102,6 @@
 The application&rsquo;s <code>draw</code> function applies an FFT with 512 bins to the input stream and stores the result. The <code>updateTube</code> function is called for each frame to configure each tube&rsquo;s frequency response, colour, and sensitivity; then calculates the resulting brightness of each tube and draws a visual representation of the tube on the GUI.</p>
 
 <p><img src="/post/reactive-lighting-installation/gui.png" alt="Tube Processor GUI" /></p>
-
-<h2 id="updatetube">updateTube</h2>
 
 <pre><code class="language-C">
 float updateTube(int n, int fLB, int fUB, color colour, float gain){
@@ -145,16 +141,14 @@ float updateTube(int n, int fLB, int fUB, color colour, float gain){
 
 </code></pre>
 
-<p>The data is transferred to the microcontroller using a USB serial connection. A <code>serialEvent</code> is used to send the data (<code>tubeVals</code> array) whenever the Processing application recives a serial interrupt, allowing the microcontroller to request the most up to date data whenever it is ready to refresh the LEDs.</p>
-
-<h2 id="serialevent">serialEvent</h2>
+<p>The data is transferred to the microcontroller using a USB serial connection. A <code>serialEvent</code> is used to send the data <code>tubeVals[]</code> whenever the Processing application recives a serial interrupt.</p>
 
 <pre><code class="language-C">void serialEvent(Serial myPort) {
   myPort.write(tubeVals);  
 }
 </code></pre>
 
-<h2 id="arduino-main-loop">Arduino main loop</h2>
+<p>Allowing the microcontroller to request the most up to date data whenever it is ready to refresh the LEDs.</p>
 
 <pre><code class="language-C">requestData();
 
