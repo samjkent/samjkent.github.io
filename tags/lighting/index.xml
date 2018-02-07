@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lighting on Sam Kent</title>
+    <link>https://samkent.xyz/tags/lighting/</link>
+    <description>Recent content in Lighting on Sam Kent</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 05 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://samkent.xyz/tags/lighting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Reactive Lighting Installation</title>
+      <link>https://samkent.xyz/reactive-lighting-installation/reactive-lighting-installation/</link>
+      <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://samkent.xyz/reactive-lighting-installation/reactive-lighting-installation/</guid>
+      <description>Featured on Hack A Day!
+Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at Hyde Park Book Club (Leeds) as part of Leeds Digital Festival.
+The project consists of:
+ A Processing application Arduino 300 WS2812B LEDs 100 2L Plastic Bottles  The Processing application creates an audio input stream and sets the framerate to 100 FPS.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:200,400,600,800');
+
+
+body {
+    font-family: 'Dosis', sans-serif;
+    margin: 5rem;
+}
+
+header {
+    display: flex;
+    align-items: center;
+}
+
+header > a > img {
+    height: 8rem;
+}
+
+header > div {
+    margin-left: 1rem;
+}
+
+header h1 {
+    margin:0;
+    padding: 0;
+}
+
+header ul {
+    margin: 0 0 .5rem 0;
+    padding: 0;
+}
+
+header ul li {
+    display: inline-block;
+    margin: 0 1rem 0 0;
+    padding: 0;
+}
+
+a {
+   text-decoration: none;
+   color: #000; 
+}
+
+h1 a {
+    font-weight: 800;
+}
+
+h1 span {
+    font-weight: 200;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    clear: both;
+    margin-top: 2rem;
+}
+
+article.summary {
+    width: 20em;
+    margin: .5rem;
+    transition: width 0.8s ease;
+}
+
+
+article.summary h1 {
+    color: #efefef;
+    transition: color 0.8s linear;
+}
+
+article:hover.summary h1 {
+    color: #000;
+    transition: color 0.8s linear;
+}
+
+article:hover.summary {
+    width: 25rem;
+    transition: width 0.8s ease;
+}
+
+article.summary img {
+    width: 100%;
+}
+
+.full a {
+    border-bottom: thin #000 dotted;
+}
+
+code {
+    display: inline-block;
+    background-color: #ebebeb;
+    padding: .5rem;
+}
