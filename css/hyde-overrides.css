@@ -5,7 +5,7 @@
 .sidebar-about h1 {
   color: #fff;
   margin-top: 0;
-  //  font-family: "Abril Fatface", serif;
+  font-family: "Abril Fatface", serif;
   font-size: 2.5rem;
 }
 
@@ -13,31 +13,4 @@
   padding-left: 0;
   list-style: none;
   margin-bottom: 1rem;
-}
-
-
-// Custom
-.postImage {
-  max-width: 200px;
-  max-heigh: 200px;
-}
-
-.ytcontainer {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-    margin: 0 0 1rem;
-    border-radius: 5px;
-}
-.ytvideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.smallText {
-    font-size: 75%;
 }

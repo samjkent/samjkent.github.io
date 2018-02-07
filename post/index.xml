@@ -2,24 +2,43 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Sam Kent</title>
-    <link>https://www.samkent.xyz/post/</link>
+    <link>localhost:1313/post/</link>
     <description>Recent content in Posts on Sam Kent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Fri, 05 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://www.samkent.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Reactive Lighting Installation</title>
-      <link>https://www.samkent.xyz/reactive-lighting-installation/</link>
+      <link>localhost:1313/reactive-lighting-installation/</link>
       <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samkent.xyz/reactive-lighting-installation/</guid>
-      <description>Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at Hyde Park Book Club (Leeds) as part of Leeds Digital Festival.
+      <guid>localhost:1313/reactive-lighting-installation/</guid>
+      <description>Featured on Hack A Day!
+Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at Hyde Park Book Club (Leeds) as part of Leeds Digital Festival.
 The project consists of:
  A Processing application Arduino 300 WS2812B LEDs 100 2L Plastic Bottles  The Processing application creates an audio input stream and sets the framerate to 100 FPS.</description>
+    </item>
+    
+    <item>
+      <title>Custom Mixer</title>
+      <link>localhost:1313/custom-mixer/</link>
+      <pubDate>Sat, 07 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>localhost:1313/custom-mixer/</guid>
+      <description>Custom mixer, 2 phonos, 3 band isolator</description>
+    </item>
+    
+    <item>
+      <title>Groundforce Sound System</title>
+      <link>localhost:1313/groundforce-sound-system/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>localhost:1313/groundforce-sound-system/</guid>
+      <description></description>
     </item>
     
   </channel>

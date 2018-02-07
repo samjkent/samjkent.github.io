@@ -17,25 +17,17 @@
 }
 @media (min-width: 48em) {
   .sidebar-about img {
-    margin: 0 auto 0.75rem auto;
+    margin: 0 0 0.75rem 0;
     width: 175px;
     height: 175px;
   }
 }
 @media (min-width: 58em) {
   .sidebar-about img {
-    margin: 0 auto 1rem auto;
+    margin: 0 0 1rem 0;
     width: 200px;
     height: 200px;
   }
-}
-
-.sidebar {
-	min-height:100%;
-}
-
-html, body {
-	height:100%;
 }
 
 /* From bootstrap.css 3.3.2 - start */
@@ -385,8 +377,4 @@ a.label:focus {
   color: #777;
   background-color: #fff;
   border-color: #ddd;
-}
-
-.tiny {
- font-size: .5em;
 }
