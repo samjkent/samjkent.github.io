@@ -3,7 +3,8 @@
 
 body {
     font-family: 'Dosis', sans-serif;
-    margin: 5rem;
+    height: 100%;
+    padding: 3.5rem;
 }
 
 header {
@@ -17,6 +18,14 @@ header > a > img {
 
 header > div {
     margin-left: 1rem;
+}
+
+header ul a {
+    color: #666;
+}
+
+header ul a:hover {
+    color: #000;
 }
 
 header h1 {
@@ -64,7 +73,7 @@ article.summary {
 
 
 article.summary h1 {
-    color: #efefef;
+    color: #fefefe;
     transition: color 0.8s linear;
 }
 
@@ -82,12 +91,37 @@ article.summary img {
     width: 100%;
 }
 
+.full {
+    width: 100%;
+}
+
 .full a {
     border-bottom: thin #000 dotted;
 }
 
 code {
-    display: inline-block;
+    display: block;
     background-color: #ebebeb;
     padding: .5rem;
+    overflow-x: scroll;
 }
+
+@media only screen and (max-width: 700px) {
+    body {
+        padding: 0;
+    }
+
+    header {
+        display: block;
+        text-align: center;
+    }
+
+    article.summary {
+        width: 100%;
+    }
+
+    article.summary h1 {
+        color: #000;
+    }
+}
+
