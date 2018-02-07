@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Sam Kent</title>
-    <link>localhost:1313/tags/</link>
+    <link>https://samkent.xyz/tags/</link>
     <description>Recent content in Tags on Sam Kent</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Fri, 05 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://samkent.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Audio</title>
-      <link>localhost:1313/tags/audio/</link>
+      <link>https://samkent.xyz/tags/audio/</link>
       <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>localhost:1313/tags/audio/</guid>
+      <guid>https://samkent.xyz/tags/audio/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Electronics</title>
-      <link>localhost:1313/tags/electronics/</link>
+      <link>https://samkent.xyz/tags/electronics/</link>
       <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>localhost:1313/tags/electronics/</guid>
+      <guid>https://samkent.xyz/tags/electronics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lighting</title>
-      <link>localhost:1313/tags/lighting/</link>
+      <link>https://samkent.xyz/tags/lighting/</link>
       <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>localhost:1313/tags/lighting/</guid>
+      <guid>https://samkent.xyz/tags/lighting/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Music</title>
-      <link>localhost:1313/tags/music/</link>
+      <link>https://samkent.xyz/tags/music/</link>
       <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>localhost:1313/tags/music/</guid>
+      <guid>https://samkent.xyz/tags/music/</guid>
       <description></description>
     </item>
     

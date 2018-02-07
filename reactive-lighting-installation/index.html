@@ -4,127 +4,62 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Reactive Lighting Installation</title>
+	<title>Reactive-lighting-installations</title>
 	
 	
-	<link rel="stylesheet" href="localhost:1313css/style.css">
-	
+	<link rel="stylesheet" href="https://samkent.xyzcss/style.css">
+	<link href="https://samkent.xyz/reactive-lighting-installation/index.xml" rel="feed" type="application/rss+xml" title="Sam Kent">
 	<meta name="generator" content="Hugo 0.32.3" />
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body>
 	<header>
-        <img src="/images/me.png" />
+        <a href="https://samkent.xyz"><img src="/images/me.png" /></a>
         <div>
-            <h1><a href="localhost:1313">Sam Kent</a> <span>MEng MIET</span></h1>
+            <h1><a href="https://samkent.xyz">Sam Kent</a> <span>MEng MIET</span></h1>
             <ul>
                 <li><a href="https://github.com/microbit-sam"><i class="fab fa-github"></i> microbit-sam </a></li>
                 <li><a href="https://github.com/samjkent"><i class="fab fa-github"></i> samjkent </a></li>
                 <li><a href="https://linkedin.com/in/samjohnkent"><i class="fab fa-linkedin"></i> samjohnkent </a></li>
             </ul>
-            <div>Working on various projects for the Micro:bit Educational Foundation and Octotech</div>
+            <div>Currently working on various projects for the Micro:bit Educational Foundation and Octotech</div>
         </div>
 	</header>
 
-<div class="content container">
-  <div class="post">
-    <h1 class="post-title">Reactive Lighting Installation</h1>
-    <span class="post-date">May 5, 2017 &middot; 2 minute read
-    
-    <br/>
-    <a class="label" href="#ZgotmplZelectronics">Electronics</a><a class="label" href="#ZgotmplZaudio">Audio</a>
-    </span>
-    <p><a href="https://www.hackaday.com/">Featured on Hack A Day!</a></p>
+	<main>
+		
+		
+		<div>
 
-<p>Two friends studying at Leeds College of Music had a module that required them to create a piece of music for an external creative project, exhibition, or show. Together we designed, built, and exhibited the project at <a href="https://www.facebook.com/events/648002642051974/">Hyde Park Book Club</a> (Leeds) as part of <a href="http://www.leedsdigitalfestival.org/float-spectrum-audio-visual-installation/">Leeds Digital Festival</a>.</p>
+1 of 0
 
-<p>The project consists of:</p>
-
-<ul>
-<li>A <a href="https://processing.org">Processing</a> application</li>
-<li>Arduino</li>
-<li>300 WS2812B LEDs</li>
-<li>100 2L Plastic Bottles</li>
-</ul>
-
-<p>The Processing application creates an audio input stream and sets the framerate to 100 FPS.
-The application&rsquo;s <code>draw</code> function applies an FFT with 512 bins to the input stream and stores the result. The <code>updateTube</code> function is called for each frame to configure each tube&rsquo;s frequency response, colour, and sensitivity; then calculates the resulting brightness of each tube and draws a visual representation of the tube on the GUI.</p>
-
-<p><img src="/post/reactive-lighting-installation/gui.png" alt="Tube Processor GUI" /></p>
-
-<pre><code class="language-C">
-float updateTube(int n, int fLB, int fUB, color colour, float gain){
-  
-  if(fUB &lt; fLB){
-    print(&quot;Error: fUB is smaller than fLB&quot;);
-    return 0.0;
-  }
-  
-  // Convert f to bins
-  float fPerBin = 20000/bands;
-  int fLBBin = ceil(fLB/fPerBin);
-  int fUBBin = ceil(fUB/fPerBin);
-  
-  float binAvg = 0;
-  
-  // Get average of bins
-  for(int i = fLBBin; i &lt;= fUBBin; i++){
-    binAvg = binAvg + spectrum[i];
-  }
-  
-  float binMag = (binAvg/(fUBBin-fLBBin+1));
-  binMag = binMag * globalGain * gain;
-  
-  // avg out
-  float alpha = 0.595;
-  binMag = (1-alpha) * tubeValues[n] + alpha * binMag;
-
-  float binMult = binMag/255.0;
-  if(binMult &gt; 1) binMult = 1;
-  byte binMag_byte = (byte)floor(0xFF * binMult);
-  
-  if(binMag_byte == 0xFF) binMag_byte = (byte)0xFE;
-  tubeVals[n] = binMag_byte;
-  return binMag;
-}
-
-</code></pre>
-
-<p>The data is transferred to the microcontroller using a USB serial connection. A <code>serialEvent</code> is used to send the data <code>tubeVals[]</code> whenever the Processing application recives a serial interrupt.</p>
-
-<pre><code class="language-C">void serialEvent(Serial myPort) {
-  myPort.write(tubeVals);  
-}
-</code></pre>
-
-<p>Allowing the microcontroller to request the most up to date data whenever it is ready to refresh the LEDs.</p>
-
-<pre><code class="language-C">requestData();
-
-if(Serial.available() &gt; 0){
-    Serial.readBytes(byteBuffer, NUM_TUBES);
-    for(int i = 0; i &lt; NUM_TUBES; i++){
-        unsigned int brightness = (unsigned int)byteBuffer[i];
-        brightness = brightness * 2;
-        if(brightness &gt; 255) brightness = 255; 
-        hsv_vals[i][2] = brightness; // Update brightness
-    }            
-}
-</code></pre>
-
-<p>Initially 25 tubes were built and arranged in a 5x5 grid: outer ring blue, high frequencies; middle ring yellow, mid range frequencies; center tube red, low frequencies . The average magnitude of the frequency bins that span each tubes response is used to modulate the brightness (V of each HSV colour) to pulse the tube in time with the audio&rsquo;s transients.</p>
-
-<p><img src="/post/reactive-lighting-installation/hpbc.png" alt="Tube Processor GUI" /></p>
-
-  </div>
-  
 </div>
-
-
-
+	</main>
+	<aside>
+		<div>
+			<div>
+				<h3>LATEST POSTS</h3>
+			</div>
+			<div>
+				<ul>
+					
+					<li><a href="https://samkent.xyz/reactive-lighting-installation/reactive-lighting-installation/">Reactive Lighting Installation</a></li>
+					
+					<li><a href="https://samkent.xyz/diy-mixer/diy-mixer/">Custom Mixer</a></li>
+					
+					<li><a href="https://samkent.xyz/groundforce-sound-system/groundforce-sound-system/">Groundforce Sound System</a></li>
+					
+					<li><a href="https://samkent.xyz/tags/audio/">Audio</a></li>
+					
+					<li><a href="https://samkent.xyz/categories/audio/">Audio</a></li>
+					
+				</ul>
+			</div>
+		</div>
+	</aside>
 
 	<footer>
-		<p>&copy; 2018 <a href="localhost:1313">Sam Kent</a></p>
+		<p>&copy; 2018 <a href="https://samkent.xyz">Sam Kent</a></p>
 	</footer>
 </body>
 </html>

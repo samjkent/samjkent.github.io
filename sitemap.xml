@@ -3,76 +3,88 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>localhost:1313/reactive-lighting-installation/</loc>
+    <loc>https://samkent.xyz/reactive-lighting-installation/reactive-lighting-installation/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>localhost:1313/custom-mixer/</loc>
+    <loc>https://samkent.xyz/diy-mixer/diy-mixer/</loc>
     <lastmod>2017-01-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>localhost:1313/groundforce-sound-system/</loc>
+    <loc>https://samkent.xyz/groundforce-sound-system/groundforce-sound-system/</loc>
     <lastmod>2017-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>localhost:1313/tags/audio/</loc>
+    <loc>https://samkent.xyz/tags/audio/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/categories/audio/</loc>
+    <loc>https://samkent.xyz/categories/audio/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/categories/</loc>
+    <loc>https://samkent.xyz/categories/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/tags/electronics/</loc>
+    <loc>https://samkent.xyz/diy-mixer/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://samkent.xyz/tags/electronics/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/categories/electronics/</loc>
+    <loc>https://samkent.xyz/categories/electronics/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/tags/lighting/</loc>
+    <loc>https://samkent.xyz/groundforce-sound-system/</loc>
+    <lastmod>2017-01-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://samkent.xyz/tags/lighting/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/tags/music/</loc>
+    <loc>https://samkent.xyz/tags/music/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/post/</loc>
+    <loc>https://samkent.xyz/reactive-lighting-installation/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/</loc>
+    <loc>https://samkent.xyz/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>localhost:1313/tags/</loc>
+    <loc>https://samkent.xyz/tags/</loc>
     <lastmod>2017-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
