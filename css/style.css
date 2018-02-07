@@ -99,6 +99,10 @@ article.summary img {
     border-bottom: thin #000 dotted;
 }
 
+.full img {
+    max-width: 100%;
+}
+
 code {
     display: block;
     background-color: #ebebeb;
