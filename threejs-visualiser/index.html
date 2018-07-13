@@ -1,0 +1,152 @@
+<html> 
+<head> 
+<title>ThreeJS Visualiser</title> 
+<style> body { margin: 0; } canvas { width: 100%; height: 100% } </style> 
+</head> 
+<body> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/91/three.js"></script> 
+<script>
+var scene = new THREE.Scene(); 
+scene.fog = new THREE.Fog( {color: 0xffffff, near: 0, far: 20} );
+
+var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 ); 
+
+var renderer = new THREE.WebGLRenderer(); renderer.setSize( window.innerWidth, window.innerHeight ); 
+document.body.appendChild( renderer.domElement ); 
+
+// Light
+var light = new THREE.HemisphereLight( 0xFFFFFF, 0x101020, .1);
+light.position.set(0.75, 1, 0.25);
+scene.add(light);
+
+// Room
+var geometry    = new THREE.CubeGeometry(1, 1, 1);
+var material    = new THREE.MeshPhongMaterial({
+        color   : 0xaa8888,
+        specular: 0xffffff,
+        shininess: 1000,
+        side    : THREE.BackSide,
+});
+var object3d    = new THREE.Mesh( geometry, material )
+object3d.scale.set(100,100,100)
+object3d.name = "room";
+scene.add(object3d)
+
+// Audio set up
+var aCtx;
+var analyser;
+var microphone;
+var bufferLength;
+if (navigator.getUserMedia) {
+    navigator.getUserMedia({audio: true}, function(stream) {
+        var AudioContext = window.AudioContext || window.webkitAudioContext;
+        aCtx = new AudioContext();
+        analyser = aCtx.createAnalyser();
+        analyser.fftSize = 128;
+        analyser.smoothingTimeConstant = 0.1
+        bufferLength = analyser.frequencyBinCount;
+        microphone = aCtx.createMediaStreamSource(stream);
+        microphone.connect(analyser);
+        createLasers();
+    } , function (){console.warn("Error getting audio stream from getUserMedia")}
+    );
+};
+
+var createLasers = function () {
+// Lasers
+for(i = 0; i < bufferLength; i++){
+        geometry = new THREE.CylinderGeometry( .228 - (i * 0.01), .228 - (i * 0.01), 200, 32 );
+        material = new THREE.MeshBasicMaterial( { color: 0xFF0000, blending: THREE.AdditiveBlending } ); 
+        material.transparent = true;
+        var laser = new THREE.Mesh( geometry, material ); 
+        //laser.position.x   = i - 25; 
+        laser.position.x = (50*Math.random()) - 25; 
+        laser.position.y = (50*Math.random()) - 25; 
+        laser.position.z = (50*Math.random()) - 25; 
+        laser.rotation.x = (2*Math.PI) * Math.random();
+        laser.rotation.y = (2*Math.PI) * Math.random();
+        laser.rotation.z = (2*Math.PI) * Math.random();
+        scene.add( laser );
+}
+}
+
+var FFTToOpacity = function (data) {
+        // FFT data is 0 -> -infinity
+        // +ve
+        data = data * -1;
+        
+        // Scale 0 to 1
+        data = data / 100;
+
+        // Larger mag is quieter
+        data = 1 - data;
+        
+        if(data < 0) data = 0;
+        return data
+}
+
+// Camera and controls
+camera.position.z = 50; 
+
+var animate = function () 
+{ 
+        requestAnimationFrame( animate ); 
+        renderer.render(scene, camera); 
+        
+        if(typeof analyser != "undefined"){
+                FFTData = new Float32Array(bufferLength);
+                analyser.getFloatFrequencyData(FFTData);
+        }
+
+        var i = 0;
+        scene.traverse( function(node) {
+                if( node instanceof THREE.Mesh ) {
+                        if(typeof FFTData != "undefined" && node.name != "room"){
+                                node.rotation.x += (2*Math.PI/2048) * Math.random();
+                                node.rotation.y += (2*Math.PI/2048) * Math.random();
+                                node.rotation.z += (2*Math.PI/2048) * Math.random();
+                                node.material.opacity = FFTToOpacity(FFTData[i]);
+                          i++;
+                        }
+                }
+
+                if( node instanceof THREE.HemisphereLight && typeof FFTData != "undefined")
+                {
+                        node.intensity = FFTToOpacity(FFTData[30]);
+                        console.log(node.intensity);
+                }
+        });
+
+}; 
+animate(); 
+
+document.addEventListener("keydown", onDocumentKeyDown, false);
+// movement
+function onDocumentKeyDown(event) {
+    var keyCode = event.which;
+    // up
+    if (keyCode == 87) {
+        camera.position.z--;
+        // down
+    } else if (keyCode == 83) {
+        camera.position.z++;
+        // left
+    } else if (keyCode == 65) {
+        camera.position.x--;
+        // right
+    } else if (keyCode == 68) {
+        camera.position.x++;
+    // turn left
+    } else if (keyCode == 37) {
+        camera.rotation.y += Math.PI/64;
+    // turn left
+    } else if (keyCode == 39) {
+        camera.rotation.y -= Math.PI/64;
+    }
+    console.log(keyCode);
+};
+
+</script> 
+</body> 
+</html>
+
