@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - materials - video - webcam</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+				font-weight: bold;
+				text-align:center;
+			}
+
+			a {
+				color:#0078ff;
+			}
+
+			#info {
+				color:#fff;
+				position: absolute;
+				top: 5px; width: 100%;
+				z-index:100;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<script src="js/three.js"></script>
+		<script src="js/OrbitControls.js"></script>
+		<script src="js/Detector.js"></script>
+
+		<video id="video" autoplay style="display:none"></video>
+
+        <canvas id="depthCanvas" style="display:none;"></canvas>
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var camera, scene, renderer, video, geometry, mesh, composer;
+            var canvas, canvasContext, pixels;
+            var xSeg = 32, ySeg = 18;
+
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+var source;
+var stream;
+
+var analyser = audioCtx.createAnalyser();
+analyser.minDecibels = -90;
+analyser.maxDecibels = -10;
+analyser.smoothingTimeConstant = 0.85;
+
+if (navigator.getUserMedia) {
+   console.log('getUserMedia supported.');
+   navigator.getUserMedia (
+      // constraints - only audio needed for this app
+      {
+         audio: true
+      },
+
+      // Success callback
+      function(stream) {
+         source = audioCtx.createMediaStreamSource(stream);
+         source.connect(analyser);
+      },
+      // Error callback
+      function(err) {
+         console.log('The following gUM error occured: ' + err);
+      }
+      )
+}
+
+analyser.fftSize = 1024;
+var bufferLength = analyser.frequencyBinCount;
+console.log(bufferLength);
+var dataArray = new Float32Array(bufferLength);
+			
+            init();
+			animate();
+
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100 );
+				camera.position.z = 0.01;
+
+				scene = new THREE.Scene();
+
+				video = document.getElementById( 'video' );
+				var texture = new THREE.VideoTexture( video );
+				texture.minFilter = THREE.LinearFilter;
+				texture.magFilter = THREE.LinearFilter;
+				texture.format = THREE.RGBFormat;
+
+
+				geometry = new THREE.PlaneGeometry( 16, 9, xSeg, ySeg);
+				geometry.scale( 5, 5, 5 );
+
+				var material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false } );
+                material.vertexColors = THREE.VertexColors;
+
+				var count = 128;
+				var radius = 32;
+
+				var spherical = new THREE.Spherical();
+
+				for ( var i = 1, l = count; i <= l; i ++ ) {
+
+					var phi = Math.acos( - 1 + ( 2 * i ) / l );
+					var theta = Math.sqrt( l * Math.PI ) * phi;
+
+					spherical.set( radius, phi, theta );
+
+					mesh = new THREE.Mesh( geometry, material );
+					mesh.position.setFromSpherical( spherical );
+					mesh.lookAt( camera.position );
+					scene.add( mesh );
+				}
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+                renderer.vr.enabled = true;
+				document.body.appendChild( renderer.domElement );
+
+				var controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.enableZoom = false;
+				controls.enablePan = false;
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+				//
+
+				if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
+
+					var constraints = { video: { width: 1280, height: 720, facingMode: 'user' } };
+
+					navigator.mediaDevices.getUserMedia( constraints ).then( function( stream ) {
+
+							// apply the stream to the video element used in the texture
+
+							video.src = window.URL.createObjectURL( stream );
+							video.play();
+
+					} ).catch( function( error ) {
+
+						console.error( 'Unable to access the camera/webcam.', error );
+
+					} );
+
+				} else {
+
+					console.error( 'MediaDevices interface not available.' );
+
+				}
+
+                canvas = document.getElementById("depthCanvas");
+                canvasContext = canvas.getContext("2d");
+
+                camera.lookAt(0,90,0);
+
+			 }
+
+			 function onWindowResize() {
+
+				 camera.aspect = window.innerWidth / window.innerHeight;
+				 camera.updateProjectionMatrix();
+
+				 renderer.setSize( window.innerWidth, window.innerHeight );
+
+			 }
+
+			 function animate() {
+                 
+                 canvasContext.drawImage(video,0,0,xSeg,ySeg);   
+
+                 pixels = canvasContext.getImageData(0, 0, xSeg + 1, ySeg + 1).data;
+
+                for (var i = 0; i < xSeg + 1; i++) {
+		for (var j = 0; j < ySeg + 1; j++) {
+			var color = new THREE.Color(getColor(i, j));
+			var brightness = getBrightness(color);
+
+			geometry.vertices[j * (xSeg + 1) + i].z = -20*brightness; 
+		}
+	}
+
+                 analyser.getFloatFrequencyData(dataArray);
+                 for(var i = 0; i < geometry.vertices.length; i++){
+                      geometry.vertices[i].z += dataArray[Math.round(i*((ySeg*xSeg)/bufferLength))];
+                 }
+                 geometry.verticesNeedUpdate = true;
+
+				 requestAnimationFrame( animate );
+				 renderer.render( scene, camera );
+
+			 }
+
+function getColor(x, y) {
+	var base = (Math.floor(y) * (xSeg + 1) + Math.floor(x)) * 4;
+	var c = {
+		r: pixels[base + 0],
+		g: pixels[base + 1],
+		b: pixels[base + 2],
+		a: pixels[base + 3]
+	};
+	return (c.r << 16) + (c.g << 8) + c.b;
+}
+
+//return pixel brightness between 0 and 1 based on human perceptual bias
+
+function getBrightness(c) {
+	return (0.34 * c.r + 0.5 * c.g + 0.16 * c.b);
+}
+
+		</script>
+	</body>
+</html>
