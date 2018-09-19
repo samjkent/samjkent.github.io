@@ -28,6 +28,20 @@
 				z-index:100;
 			}
 
+            #startBtn {
+            margin: 1em auto auto auto;
+            padding: .5em;
+            font-size: 5em;
+            background-color: black;
+            color: white;
+            }
+
+            #startBtn:hover {
+                background-color: white;
+                color: black;
+                cursor: pointer;
+            }
+
 		</style>
 	</head>
 	<body>
@@ -36,8 +50,10 @@
 		<script src="js/OrbitControls.js"></script>
 		<script src="js/Detector.js"></script>
 
-		<video id="video" autoplay style="display:none"></video>
-        <audio id="audio" autoplay style="display:none" src="audio/track.ogg"></audio>
+		<video id="video" style="display:none"></video>
+        <audio id="audio" style="display:none" src="audio/track.ogg"></audio>
+
+        <button id="startBtn" onClick="start();">>>> START <<<</button>
 
         <canvas id="depthCanvas" style="display:none;"></canvas>
 		<script>
@@ -48,6 +64,7 @@
             var canvas, canvasContext, pixels;
             var xSeg = 32, ySeg = 18;
 
+var audio;
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 var source;
 var stream;
@@ -56,6 +73,13 @@ var analyser = audioCtx.createAnalyser();
 analyser.minDecibels = -90;
 analyser.maxDecibels = -10;
 analyser.smoothingTimeConstant = 0.85;
+
+function start(){
+	video.play();
+    audio.play();
+    document.getElementById('startBtn').style.display = 'none';
+}
+
 
 /*
 if (navigator.getUserMedia) {
@@ -78,8 +102,8 @@ if (navigator.getUserMedia) {
       )
 }*/
 
-var myAudio = document.querySelector('audio');
-source = audioCtx.createMediaElementSource(myAudio);
+audio = document.querySelector('audio');
+source = audioCtx.createMediaElementSource(audio);
 source.connect(analyser);
 source.connect(audioCtx.destination);
 
@@ -153,7 +177,6 @@ var dataArray = new Float32Array(bufferLength);
 							// apply the stream to the video element used in the texture
 
 							video.src = window.URL.createObjectURL( stream );
-							video.play();
 
 					} ).catch( function( error ) {
 
