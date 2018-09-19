@@ -37,6 +37,7 @@
 		<script src="js/Detector.js"></script>
 
 		<video id="video" autoplay style="display:none"></video>
+        <audio id="audio" autoplay style="display:none" src="audio/track.ogg"></audio>
 
         <canvas id="depthCanvas" style="display:none;"></canvas>
 		<script>
@@ -56,6 +57,7 @@ analyser.minDecibels = -90;
 analyser.maxDecibels = -10;
 analyser.smoothingTimeConstant = 0.85;
 
+/*
 if (navigator.getUserMedia) {
    console.log('getUserMedia supported.');
    navigator.getUserMedia (
@@ -74,7 +76,12 @@ if (navigator.getUserMedia) {
          console.log('The following gUM error occured: ' + err);
       }
       )
-}
+}*/
+
+var myAudio = document.querySelector('audio');
+source = audioCtx.createMediaElementSource(myAudio);
+source.connect(analyser);
+source.connect(audioCtx.destination);
 
 analyser.fftSize = 1024;
 var bufferLength = analyser.frequencyBinCount;
