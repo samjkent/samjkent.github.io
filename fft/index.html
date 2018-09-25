@@ -77,6 +77,23 @@ analyser.smoothingTimeConstant = 0.85;
 function start(){
 	video.play();
     audio.play();
+				
+        if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
+
+			var constraints = { audio: false, video: { width: 1280, height: 720, facingMode: 'environment' } };
+
+			navigator.mediaDevices.getUserMedia( constraints ).then( function( stream ) {
+
+			// apply the stream to the video element used in the texture
+
+			video.src = window.URL.createObjectURL( stream );
+    
+            } ).catch( function( error ) {
+
+			console.error( 'Unable to access the camera/webcam.', error );
+
+		} );
+
     document.getElementById('startBtn').style.display = 'none';
 }
 
