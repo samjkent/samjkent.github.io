@@ -75,7 +75,6 @@ analyser.maxDecibels = -10;
 analyser.smoothingTimeConstant = 0.85;
 
 function start(){
-	video.play();
     audio.play();
 				
         if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
@@ -88,6 +87,8 @@ function start(){
 
 			video.src = window.URL.createObjectURL( stream );
     
+	        video.play();
+
             } ).catch( function( error ) {
 
 			console.error( 'Unable to access the camera/webcam.', error );
