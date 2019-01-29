@@ -85,7 +85,11 @@ function start(){
 
 			// apply the stream to the video element used in the texture
 
-			video.src = window.URL.createObjectURL( stream );
+            try {
+              video.srcObject = stream;
+            } catch (error) {
+              video.src = window.URL.createObjectURL(stream);
+            }
     
 	        video.play();
 
@@ -246,6 +250,10 @@ var dataArray = new Float32Array(bufferLength);
                  }
                  geometry.verticesNeedUpdate = true;
 
+                 // Camera
+
+
+				 camera.rotation.z += 0.001;
 				 requestAnimationFrame( animate );
 				 renderer.render( scene, camera );
 
