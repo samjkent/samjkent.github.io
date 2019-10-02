@@ -24,10 +24,6 @@ header ul a {
     color: #666;
 }
 
-header ul a:hover {
-    color: #000;
-}
-
 header h1 {
     margin:0;
     padding: 0;
@@ -63,28 +59,31 @@ main {
     align-items: center;
     clear: both;
     margin-top: 2rem;
+    justify-content: space-between;
 }
 
 article.summary {
     width: 20em;
+    height: 20em;
     margin: .5rem;
     transition: width 0.8s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
 }
 
 
 article.summary h1 {
-    color: #fefefe;
-    transition: color 0.8s linear;
+    color: #fff;
+    background-color: rgba(100,100,100,0.4);
+    font-weight: 500;
+    padding: .4em;
 }
 
-article:hover.summary h1 {
-    color: #000;
-    transition: color 0.8s linear;
-}
-
-article:hover.summary {
-    width: 25rem;
-    transition: width 0.8s ease;
+article.summary h1:after {
+   content: " ❱❱";
 }
 
 article.summary img {
@@ -110,7 +109,7 @@ code {
     overflow-x: scroll;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
     body {
         padding: 0;
     }
@@ -122,10 +121,6 @@ code {
 
     article.summary {
         width: 100%;
-    }
-
-    article.summary h1 {
-        color: #000;
     }
 }
 
