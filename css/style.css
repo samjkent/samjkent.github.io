@@ -40,13 +40,21 @@ header ul li {
     padding: 0;
 }
 
+
+h1 a {
+  font-weight: 800;
+}
+
 a {
-   text-decoration: none;
    color: #000; 
 }
 
-h1 a {
-    font-weight: 800;
+header a {
+  text-decoration: none;
+}
+
+header a:hover {
+  text-decoration: underline;
 }
 
 h1 span {
@@ -75,6 +83,9 @@ article.summary {
     flex-grow: 1;
 }
 
+article.summary a {
+    text-decoration: none;
+}
 
 article.summary h1 {
     color: #fff;
@@ -96,7 +107,7 @@ article.summary img {
 }
 
 .full a {
-    border-bottom: thin #000 dotted;
+
 }
 
 .full img {
