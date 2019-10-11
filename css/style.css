@@ -72,6 +72,7 @@ article.summary {
     background-repeat: no-repeat;
     display: flex;
     align-items: flex-end;
+    flex-grow: 1;
 }
 
 
