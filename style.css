@@ -1,6 +1,6 @@
 body {
     padding: 6em;
-    font-family: Courier New, sans-serif;
+    font-family: Courier New, Courier, serif;
     font-size: 10pt;
     font-weight: thin;
 }
@@ -54,13 +54,15 @@ ul {
 and (max-width: 600px) {
     body {
         padding: 0.5em;
-        text-align: left;
     }
     .info {
         flex-direction: column-reverse;
     }
     .info > div {
         width: 100%;
+    }
+    .me {
+        text-align: left;
     }
 }
 
