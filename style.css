@@ -19,7 +19,7 @@ a {
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-top: -120px;
+    background-position-y: -180px;
     color: #fff;
 }
 
