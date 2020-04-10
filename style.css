@@ -1,0 +1,67 @@
+body {
+    padding: 6em;
+    font-family: Courier New, sans-serif;
+    font-size: 10pt;
+    font-weight: thin;
+}
+
+h1 {
+    margin: 0;
+}
+
+a {
+    color: #000;
+}
+
+.cover {
+    background-image: url('images/bg.jpg');
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+
+.cover p {
+    padding: 1em;
+}
+
+.info {
+    display: flex;
+    margin-top: 1em;
+}
+
+.info > div {
+    width: 50%;
+    overflow: wrap;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul {
+    margin-bottom: 1em;
+}
+
+.me {
+    text-align: right;
+}
+
+@media screen
+and (max-width: 600px) {
+    body {
+        padding: 0.5em;
+    }
+}
+
+.taglist {
+    font-weight: 100;
+    font-size: smaller;
+}
+
+.hide {
+    display: none;
+}
