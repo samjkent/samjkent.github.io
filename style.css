@@ -54,6 +54,7 @@ ul {
 and (max-width: 600px) {
     body {
         padding: 0.5em;
+        text-align: left;
     }
     .info {
         flex-direction: column-reverse;
