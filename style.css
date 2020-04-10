@@ -2,6 +2,7 @@ body {
     padding: 6em;
     font-family: Courier New, Courier, serif;
     font-size: 10pt;
+    overflow: hidden;
 }
 
 h1 {
