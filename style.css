@@ -65,6 +65,9 @@ and (max-width: 600px) {
     .me {
         text-align: left;
     }
+    .cover {
+        background-position-y: top;
+    }
 }
 
 .taglist {
