@@ -14,7 +14,9 @@ a {
 }
 
 .cover {
-    background-image: url('images/bg.jpg');
+    filter: blur(20px);
+    clip-path: border-box;
+    background-image: url('images/bg_low.jpg');
     height: 400px;
     width: 100%;
     background-size: cover;
