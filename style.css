@@ -51,6 +51,12 @@ ul {
     margin-bottom: 1em;
 }
 
+ul.projects {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
 .me {
     text-align: right;
 }
