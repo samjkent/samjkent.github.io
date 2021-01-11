@@ -57,23 +57,13 @@ ul.projects {
     -moz-columns: 2;
 }
 
-.me {
-    text-align: right;
-}
-
 @media screen
 and (max-width: 600px) {
     body {
         padding: 0.5em;
     }
-    .info {
-        flex-direction: column-reverse;
-    }
     .info > div {
         width: 100%;
-    }
-    .me {
-        text-align: left;
     }
     .cover {
         background-position-y: top;
