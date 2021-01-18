@@ -62,6 +62,9 @@ and (max-width: 600px) {
     body {
         padding: 0.5em;
     }
+    .info {
+        display: block;
+    }
     .info > div {
         width: 100%;
     }
