@@ -1,84 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab&display=swap');
 
 body {
-    padding: 6em;
     font-family: 'Zilla Slab', Courier New, Courier, serif;
-    font-size: 10pt;
-    overflow: hidden;
-}
-
-h1 {
-    margin: 0;
 }
 
 a {
-    color: #000;
+    color: #000;    
 }
 
-.cover {
-    filter: blur(20px);
+.section {
+    min-height: 100vh;
+    padding: 2rem;
+    border-bottom: solid 3px #000;
+}
+
+.me {
     clip-path: border-box;
-    background-image: url('images/bg_low.jpg');
-    height: 400px;
-    width: 100%;
+    background-image: url('images/me.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position-y: -180px;
+    background-position: center center;
+    color: #fff;
+    height: 50vh;
+    background-color: #fff;
+}
+
+.mixer, .mixer-channel, .enc-small, .enc-large, .midi-cpu, .enc-demo, .drum-machine {
+    clip-path: border-box;
+    background-image: url('images/mixer.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
     color: #fff;
 }
 
-.cover p {
-    padding: 1em;
+.mixer-channel {
+    background-image: url('images/mixer-isolator.svg');
 }
 
-.info {
-    display: flex;
-    margin-top: 1em;
+.enc-small {
+    background-image: url('images/enc-small.svg');
 }
 
-.info > div {
-    width: 50%;
-    overflow: wrap;
+.enc-large {
+    background-image: url('images/enc-large.svg');
 }
 
-ul, li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.midi-cpu {
+    background-image: url('images/midi-cpu.svg');
+    height: 50%;
+}
+
+.enc-demo {
+    background-image: url('images/demo.gif');
+    height: 50%;
+}
+
+.drum-machine {
+    background-image: url('images/drum-machine.svg');
 }
 
 ul {
-    margin-bottom: 1em;
+    padding: 0;
+    margin: 0;
 }
 
-ul.projects {
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
+li {
+    padding: 1rem;
+    margin-bottom: .5rem;
+    list-style: none;
+    background-color: #80f2b0;
 }
 
-@media screen
-and (max-width: 600px) {
-    body {
-        padding: 0.5em;
-    }
-    .info {
-        display: block;
-    }
-    .info > div {
-        width: 100%;
-    }
-    .cover {
-        background-position-y: top;
-    }
+li:hover {
+    background-color: #50d2a0;
 }
-
-.taglist {
-    font-weight: 100;
-    font-size: smaller;
-}
-
-.hide {
-    display: none;
-}
-

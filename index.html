@@ -1,51 +1,96 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Sam Kent</title>
-  <meta name="author" content="Sam Kent">
-  <meta name="description" content="Sam Kent. Hardware / Software Engineer. Audio Tech. Microcontrollers.">
-  <meta name="keywords" content="hardware,software,engineer,microcontroller,audio,music technology">
-  <link rel="shortcut icon" href="images/me.png" type="image/png">
-  <link rel="stylesheet" href="style.css" type="text/css">
-  </head>
-  <body>
-    <div class="info">
-        <div class="me">
-            <h1>Sam Kent</h1> MEng MIET
-            <ul>
-                    <li><a href="https://github.com/microbit-sam">microbit</a> | <a href="https://github.com/samjkent">samjkent</a></li>
-                    <li><a href="https://www.linkedin.com/in/samjohnkent/">samjohnkent</a></li>
-                    <li><a href="mailto:sam.john.kent@gmail.com">Email</a></li>
-            </ul>
-        </div>
-        <div class="projects">
-                <h1>Projects</h1>
-                <ul class="projects">
-                    <li><a href="/stm32f4-midi-brain">MIDI Brain</a></li>
-                    <li><a href="https://github.com/samjkent/DrumMachine">Drum Machine</a></li>
-                    <li><a href="https://www.youtube.com/watch?v=yov_2pZkXRQ">Float Spectrum</a></li>
-                    <li><a href="https://github.com/samjkent/cellularAutomataAudioInput">OpenFrameworks Experiments</a></li>
-                    <li><a href="https://github.com/samjkent/encoder-i2c">I2C Encoder & LEDs</a></li>
-                    <li><a href="https://instagram.com/groundforcesoundsystem/">Groundforce Soundsystem</a></li>
-                    <li><a href="https://lowfrequency.cc">Low Frequency CC</a></li>
-                    <li><a href="https://internationalorange.io">International Orange</a></li>
-                </ul>
-        </div>
-    </div>  
-    <div id="cover" class="cover"><p>Real Jardin Botanico | Nov 2019</p></div>
-    <div class="taglist hide">
-        Microcontrollers, PCB Design, C/C++, Embedded Systems, PHP, React JS/Native, Android (Java), iOS (Obj-C), BLE, Nordic nRF5x, STM32, DSP, Audio Processing, Web Development, MySQL, Active Directory, 
-    </div>
-    <script type="text/javascript">
-        var bg = new Image();
-        bg.onload = function(){
-           document.getElementById("cover").style.backgroundImage = 'url(' + bg.src + ')';
-           document.getElementById("cover").style.filter = 'none';
-        };
-        bg.src = "images/bg.jpg";
-    </script>
-  </body>
-</html>
 
+<html lang="en">
+
+<head>
+
+  <title>Hello, world!</title>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="row section">
+      <div class="col-sm-6">
+            <h1><a href="/">Sam Kent</a> <span>MEng MIET</span></h1>
+            <ul>
+                <li class="me"></li>
+                <li><a href="https://github.com/microbit-sam"><i class="fab fa-github"></i> microbit-sam </a></li>
+                <li><a href="https://github.com/samjkent"><i class="fab fa-github"></i> samjkent </a></li>
+                <li><a href="https://linkedin.com/in/samjohnkent"><i class="fab fa-linkedin"></i> samjohnkent </a></li>
+            </ul>
+      </div>
+      <div class="col-sm-6">
+            <h1>Projects</h1>
+            <ul>
+                <li class="bg-blue"><a href="/stm32f4-midi-brain">MIDI Brain</a></li>
+                <li><a href="https://github.com/samjkent/DrumMachine">Drum Machine</a></li>
+                <li><a href="https://www.youtube.com/watch?v=yov_2pZkXRQ">Float Spectrum</a></li>
+                <li><a href="https://github.com/samjkent/cellularAutomataAudioInput">OpenFrameworks Experiments</a></li>
+                <li><a href="https://github.com/samjkent/encoder-i2c">I2C Encoder &amp; LEDs</a></li>
+                <li><a href="https://instagram.com/groundforcesoundsystem/">Groundforce Soundsystem</a></li>
+                <li><a href="https://lowfrequency.cc">Low Frequency CC</a></li>
+                <li><a href="https://internationalorange.io">International Orange</a></li>
+                <li>Scroll for more &darr;</li>
+            </ul>
+      </div>
+    </div>
+
+    <div id="mixer" class="row section">
+      <div class="col-sm-3 mixer"></div>
+      <div class="col-sm-3 mixer-channel"></div>
+      <div class="col-sm-6">
+            <h2>Rotary Mixer</h2>
+            <p>Eurorack compatible module for a stereo master channel, with 2.5mm header connections for XLR and line level outputs, cue-ing system with a headphone driver, and stereo VU meters.</p>
+      </div>
+    </div>
+
+    <div id="midi" class="row section">
+      <div class="col-sm-6">
+            <h2>Modular MIDI Controller</h2>
+            <p>I2C modules and an STM32 acting as the USB controller</p>
+            <p>The GitHub repo contains example schematics and firmware for a USB MIDI device based on an STM32F4 microcontroller using the ST HAL</p>
+      </div>
+      <div class="col-sm-6">
+        <div class="midi-cpu"></div>
+        <div class="enc-demo"></div>
+      </div>
+    </div>
+    
+    <div class="row section">
+      <div class="col-sm-12 enc-small"></div>
+      <div class="col-sm-12 enc-large"></div>
+    </div>
+  
+    <div class="row section">
+      <div class="col-sm-6 drum-machine"></div>
+      <div class="col-sm-6">
+        <h2>Drum Machine</h2>
+        <p>A sampling drum machine (inspired by the digitakt) using an STM32F7</p>
+      </div>
+    </div>
+
+    <footer class="row">
+      <div class="col-sm-12">
+        <a href="#">Top &uarr;</a>
+      </div>
+    </footer>
+
+  </div>
+
+
+</body>
+
+</html>
