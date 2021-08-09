@@ -60,18 +60,28 @@ a {
     background-image: url('images/drum-machine.svg');
 }
 
-ul {
+.splash ul {
     padding: 0;
     margin: 0;
 }
 
-li {
+.splash li {
     padding: 1rem;
     margin-bottom: .5rem;
     list-style: none;
     background-color: #80f2b0;
 }
 
-li:hover {
+.splash li:hover {
     background-color: #50d2a0;
 }
+
+.signal li {
+    list-style: disclosure-closed;
+}
+
+li.work {
+    border: .2rem solid #80f2b0;
+    background-color: #fff;
+}
+

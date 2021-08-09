@@ -13,6 +13,7 @@
   <meta name="description" content="" />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/2bea0d932f.js" crossorigin="anonymous" defer></script>
 
   <link rel="stylesheet" type="text/css" href="style.css" />
 
@@ -22,21 +23,24 @@
 
   <div class="container">
 
-    <div class="row section">
+    <div class="row section splash">
       <div class="col-sm-6">
             <h1><a href="/">Sam Kent</a> <span>MEng MIET</span></h1>
             <ul>
                 <li class="me"></li>
-                <li><a href="https://github.com/microbit-sam"><i class="fab fa-github"></i> microbit-sam </a></li>
-                <li><a href="https://github.com/samjkent"><i class="fab fa-github"></i> samjkent </a></li>
-                <li><a href="https://linkedin.com/in/samjohnkent"><i class="fab fa-linkedin"></i> samjohnkent </a></li>
+                <li><i class="fab fa-github"></i> <a href="https://github.com/samjkent">samjkent </a></li>
+                <li><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/samjohnkent">samjohnkent </a></li>
+                <li><i class="fa fa-envelope"></i> <a href="sk@samjkent.co.uk">sk@samjkent.co.uk</a></li>
+                <li class="work">Available for contract work! Contact me using any of the above methods for electronic design, firmware development, or general software engineering</li>
             </ul>
       </div>
       <div class="col-sm-6">
-            <h1>Projects</h1>
+            <h1>Personal Projects</h1>
             <ul>
-                <li class="bg-blue"><a href="/stm32f4-midi-brain">MIDI Brain</a></li>
-                <li><a href="https://github.com/samjkent/DrumMachine">Drum Machine</a></li>
+                <li class="work">A selection of personal projects and interests, information about projects completed as contracted work can be found in my CV</li>
+                <li><a href="#mixer">Modular Rotary Mixer</a></li>
+                <li><a href="#midi">MIDI Brain</a></li>
+                <li><a href="#drum-machine">Drum Machine</a></li>
                 <li><a href="https://www.youtube.com/watch?v=yov_2pZkXRQ">Float Spectrum</a></li>
                 <li><a href="https://github.com/samjkent/cellularAutomataAudioInput">OpenFrameworks Experiments</a></li>
                 <li><a href="https://github.com/samjkent/encoder-i2c">I2C Encoder &amp; LEDs</a></li>
@@ -52,15 +56,35 @@
       <div class="col-sm-3 mixer"></div>
       <div class="col-sm-3 mixer-channel"></div>
       <div class="col-sm-6">
-            <h2>Rotary Mixer</h2>
-            <p>Eurorack compatible module for a stereo master channel, with 2.5mm header connections for XLR and line level outputs, cue-ing system with a headphone driver, and stereo VU meters.</p>
+            <h2>Modular Rotary Mixer</h2>
+            <p>Eurorack compatible modules for a stereo DJ mixer, with 2.5mm header connections for XLR and line level outputs, cue-ing system with a headphone driver, and VU meters.</p>
+            <p>The design is op-amp based, with filters implemented as 12db/oct active inverting filters, 1kohm output impedances, and buffered potentiometes acting as voltage dividers for the controls</p>
+            <p>The signal path of the initial 2 band isolator channel design is as follows</p>
+            <ul class="signal">
+                <li>a line level stereo input </li>
+                <li>apply a 2x gain to it  </li>
+                <li>pass it through a signal trim pot  </li>
+                <li>split the signal with low pass and high pass filters  </li>
+                <li>a potentiometer for the low pass, and a potentiometer for the high pass allow the signal to be shaped  </li>
+                <li>the remaining signals are summed  </li>
+                <li>the summed signal is sent to the channel's outputs; a potentiometer controls how much is sent to the master bus, a button controls whether the signal is sent to the cue bus, and the full signal is sent to the IC controlling the LED level meter</li>
+            </ul>
+            <p>The signal path of the master channel is simpler, summing together the different audio buses and then outputting the combined signals</p>
+            <ul class="signal">
+                <li>cue, aux, and master busses enter summing amplifiers; the 1k resistors on the channel outputs ensure that the channels are equally summed</li>
+                <li>the master signal is fed into the LED level meter, the cue summing amplifier (via a voltage divider), to a line level buffered output, and a balanced output circuit</li>
+                <li>all of these outputs have buffered voltage dividers controlling the level</li>
+                <li>the headphone output is op amp based, but when built with a high current op amp such as the Texas Instruments OPA1688 (75mA / channel), it can provide more than enough power to drive monitoring headphones</li>
+            </ul>
+            <p>The idea is to build a fully customisable system, with N channels that can be mix and matched between isolators, filters, fx units, and traditional eurorack modules</p>
       </div>
     </div>
 
     <div id="midi" class="row section">
       <div class="col-sm-6">
             <h2>Modular MIDI Controller</h2>
-            <p>I2C modules and an STM32 acting as the USB controller</p>
+            <p>The individual modules allow the device to customised for the specific application, and expanded with additional modules as required. Each module contains an MCP23017 I2C IO expander connected to it's encoders and a HT16K33 I2C controlled LED driver that allow the attached controller board to interface with the components</p>
+            <p>The controller board can then process all of of the information fed to it by the controls, respond with the correct visual feedback using the LEDs and act as the USB controller to interact with software on a users device</p>
             <p>The GitHub repo contains example schematics and firmware for a USB MIDI device based on an STM32F4 microcontroller using the ST HAL</p>
       </div>
       <div class="col-sm-6">
@@ -74,11 +98,24 @@
       <div class="col-sm-12 enc-large"></div>
     </div>
   
-    <div class="row section">
+    <div class="row section" id="drum-machine">
       <div class="col-sm-6 drum-machine"></div>
       <div class="col-sm-6">
         <h2>Drum Machine</h2>
         <p>A sampling drum machine (inspired by the digitakt) using an STM32F7</p>
+        <p>A project that is slowly moving / on hold. The majority of the required drivers have been completed, but the actual interface and audio processing requires more work</p>
+        <p>Currently implemented features</p>
+        <ul>
+            <li>Controls are implemented: buttons, analog pots, encoders</li>
+            <li>Audio output: buffer, CODEC driver</li>
+            <li>WS2812B LED feedback used for the sequencer</li>
+            <li>Display driver: ILI9341 driver using DMA to continously stream buffer</li>
+            <li>FATFS and SD card driver to manage audio files</li>
+            <li>8 channel sequencer, with 16 steps per channel</li>
+            <li>Interface to select a sample for each channel</li>
+            <li>Algorithm to draw a representation of the sample on the display</li>
+        </ul>
+        <p>When time allows the next step is to plan out how the UI should work; the hardware functionality is all there but there is no way for a user to use the features in any advanced way</p>
       </div>
     </div>
 
