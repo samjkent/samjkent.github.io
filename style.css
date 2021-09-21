@@ -25,6 +25,10 @@ a {
     background-color: #fff;
 }
 
+.mixer, .mixer-channel {
+    max-height: 90vh;
+}
+
 .mixer, .mixer-channel, .enc-small, .enc-large, .midi-cpu, .enc-demo, .drum-machine {
     clip-path: border-box;
     background-image: url('images/mixer.svg');

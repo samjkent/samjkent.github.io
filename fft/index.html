@@ -88,6 +88,7 @@ function start(){
             try {
               video.srcObject = stream;
             } catch (error) {
+              console.log(error);
               video.src = window.URL.createObjectURL(stream);
             }
     
@@ -189,7 +190,7 @@ var dataArray = new Float32Array(bufferLength);
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
-				//
+				/*
 
 				if ( navigator.mediaDevices && navigator.mediaDevices.getUserMedia ) {
 
@@ -212,6 +213,7 @@ var dataArray = new Float32Array(bufferLength);
 					console.error( 'MediaDevices interface not available.' );
 
 				}
+                */
 
                 canvas = document.getElementById("depthCanvas");
                 canvasContext = canvas.getContext("2d");
