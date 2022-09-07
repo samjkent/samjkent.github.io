@@ -1,0 +1,106 @@
+ <script
+			  src="https://code.jquery.com/jquery-3.6.1.slim.js"
+			  integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk="
+			  crossorigin="anonymous"></script>
+<style>
+html
+input{
+  display: block;
+  margin: 3px;
+}
+
+code {
+  padding: 1em;
+  background-color: #a9a9a9;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 1em;
+}
+</style>
+
+<p>This page generates a sendmidi command. This can be send to the device using: <a href="https://github.com/gbevin/SendMIDI">github.com/gbevin/SendMIDI</a>.</p>
+<div id="inputs">
+  <h2>
+  Velocity
+  </h2>
+  <p>
+  Min
+  <input id="velMin" type="number" value="4" />
+  </p>
+  <p>
+  Max
+  <input id="velMax" type="number" value="200" />
+  </p>
+  <h2>
+  Pitch
+  </h2>
+  <p>
+  Sensitivity
+  <input id="pitchMoveMin" type="number" value="40" />
+  </p>
+  <p>
+  If the dial was between 0 and 1 the max and min are how far it can physically travel.
+  To calculate the physical limit of the dial, enter 0 for the minimum and 1.0 for the maximum. Take note of the pitch value at the limits, and then enter them here.
+  </p>
+  <p>
+  Pitch Min
+  <input id="pitchMin" step="0.001"  type="number" value="0.259" max="1" />
+  </p>
+  <p>
+  Pitch Max
+  <input  id="pitchMax" step="0.001"  type="number" value="0.671" max="1" />
+  </p>
+   <h2>
+  Mod
+  </h2>
+   <p>
+  If the dial was between 0 and 1 the max and min are how far it can physically travel.
+  To calculate the physical limit of the dial, enter 0 for the minimum and 1.0 for the maximum. Take note of the pitch value at the limits, and then enter them here.
+  </p>
+  <p>
+  Mod Min
+  <input id="modMin"  step="0.0001" type="number" value="0.260" max="1" />
+  </p>
+  <p>
+  Mod Max
+  <input  id="modMax" step="0.0001" type="number" value="0.669" max="1.0" />
+  </p>
+</div>
+<code>
+sendmidi
+</code>
+
+                <script>
+                        function pad(str) {
+	let pad = '00';
+	return (pad + str).slice(-2);
+}
+
+$("#inputs").on("keyup", function(){
+  let val1 = parseInt($("#velMin").val());
+  let val2 = parseInt($("#velMax").val());
+  let val3 = parseInt($("#pitchMoveMin").val());
+  let val4 = Math.round(65535 * parseFloat($("#pitchMin").val()));
+  let val5 = Math.round(65535 * parseFloat($("#pitchMax").val()));
+  let val6 = Math.round(65535 * parseFloat($("#modMin").val()));
+  let val7 = Math.round(65535 * parseFloat($("#modMax").val()));
+
+$("code").html(
+  'sendmidi dev "MODULE 01" hex syx 11 22 33 ' +
+  pad(val1.toString(16)) + ' ' +
+  pad(val2.toString(16)) + ' ' +
+  pad(val3.toString(16)) + ' ' +
+  pad((val4 >> 8).toString(16)) + ' ' +
+  pad(val4.toString(16)) + ' ' +
+  pad((val5 >> 8).toString(16)) + ' ' +
+  pad(val5.toString(16)) + ' ' +
+  pad((val6 >> 8).toString(16)) + ' ' +
+  pad(val6.toString(16)) + ' ' +
+  pad((val7 >> 8).toString(16)) + ' ' +
+  pad(val7.toString(16)) + ' ' +
+  ' 7f');
+
+})
+                </script>
