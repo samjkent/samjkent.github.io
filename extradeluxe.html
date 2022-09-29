@@ -18,6 +18,11 @@ body {
   font-family: sans-serif;
   padding: 1em;
 }
+
+input[type="range"] {
+  width: 50rem;
+  max-width: 100vw;
+}
 </style>
 
 <p>This page generates a sendmidi command. This can be send to the device using: <a href="https://github.com/gbevin/SendMIDI">github.com/gbevin/SendMIDI</a>.</p>
@@ -46,11 +51,11 @@ body {
   </p>
   <p>
   Pitch Min
-  <input id="pitchMin" step="0.001"  type="number" value="0.259" max="1" />
+  <input id="pitchMin" type="range" min="0" max="65536" value="17000" />
   </p>
   <p>
   Pitch Max
-  <input  id="pitchMax" step="0.001"  type="number" value="0.671" max="1" />
+  <input id="pitchMax" type="range" min="0" max="65536" value="44000" />
   </p>
    <h2>
   Mod
@@ -61,11 +66,11 @@ body {
   </p>
   <p>
   Mod Min
-  <input id="modMin"  step="0.0001" type="number" value="0.260" max="1" />
+  <input id="modMin" type="range" min="0" max="65536" value="19900" />
   </p>
   <p>
   Mod Max
-  <input  id="modMax" step="0.0001" type="number" value="0.669" max="1.0" />
+  <input id="modMax" type="range" min="0" max="65536" value="47000" />
   </p>
    <h2>
   Velocity Curve
@@ -91,30 +96,50 @@ sendmidi
 	return (pad + str).slice(-2);
 }
 
+function splitByte(val)
+{
+  return pad((val >> 4).toString(16)) + ' ' +
+  pad((val & 0xf).toString(16)) + ' ';
+}
+
 $("#inputs").on("change", function(){
   let val1 = parseInt($("#velMin").val());
   let val2 = parseInt($("#velMax").val());
   let val3 = parseInt($("#pitchMoveMin").val());
-  let val4 = Math.round(65535 * parseFloat($("#pitchMin").val()));
-  let val5 = Math.round(65535 * parseFloat($("#pitchMax").val()));
-  let val6 = Math.round(65535 * parseFloat($("#modMin").val()));
-  let val7 = Math.round(65535 * parseFloat($("#modMax").val()));
+  let val4 = parseInt($("#pitchMin").val());
+  let val5 = parseInt($("#pitchMax").val());
+  let val6 = parseInt($("#modMin").val());
+  let val7 = parseInt($("#modMax").val());
   let val8 = $('select[name="curve"]').val();
+
 
 $("code").html(
   'sendmidi dev "MODULE 01" hex syx 11 22 33 ' +
-  pad(val1.toString(16)) + ' ' +
-  pad(val2.toString(16)) + ' ' +
-  pad(val3.toString(16)) + ' ' +
-  pad((val4 >> 8).toString(16)) + ' ' +
-  pad(val4.toString(16)) + ' ' +
-  pad((val5 >> 8).toString(16)) + ' ' +
-  pad(val5.toString(16)) + ' ' +
-  pad((val6 >> 8).toString(16)) + ' ' +
-  pad(val6.toString(16)) + ' ' +
-  pad((val7 >> 8).toString(16)) + ' ' +
-  pad(val7.toString(16)) + ' ' +
+
+  splitByte(val1) +
+
+  splitByte(val2) +
+
+  splitByte(val3) +
+
+  splitByte((val4 >> 8)) +
+  
+  splitByte(val4 & 0xff) +
+
+  splitByte((val5 >> 8)) +
+  
+  splitByte(val5 & 0xff) +
+  
+  splitByte((val6 >> 8)) +
+  
+  splitByte(val6 & 0xff) +
+
+  splitByte((val7 >> 8)) +
+  
+  splitByte((val7 & 0xff)) +
+
   pad(val8.toString(16)) + ' ' +
+
   ' 7f');
 
 })
