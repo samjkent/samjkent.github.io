@@ -67,6 +67,19 @@ body {
   Mod Max
   <input  id="modMax" step="0.0001" type="number" value="0.669" max="1.0" />
   </p>
+   <h2>
+  Velocity Curve
+  </h2>
+  <p>
+  Curve
+<select name="curve" id="curve">
+  <option value="1">Linear</option>
+  <option value="2" selected>Convex</option>
+  <option value="3">Concave</option>
+  <option value="4">Saturated</option>
+</select>
+</p>
+<br />
 </div>
 <code>
 sendmidi
@@ -78,7 +91,7 @@ sendmidi
 	return (pad + str).slice(-2);
 }
 
-$("#inputs").on("keyup", function(){
+$("#inputs").on("change", function(){
   let val1 = parseInt($("#velMin").val());
   let val2 = parseInt($("#velMax").val());
   let val3 = parseInt($("#pitchMoveMin").val());
@@ -86,6 +99,7 @@ $("#inputs").on("keyup", function(){
   let val5 = Math.round(65535 * parseFloat($("#pitchMax").val()));
   let val6 = Math.round(65535 * parseFloat($("#modMin").val()));
   let val7 = Math.round(65535 * parseFloat($("#modMax").val()));
+  let val8 = $('select[name="curve"]').val();
 
 $("code").html(
   'sendmidi dev "MODULE 01" hex syx 11 22 33 ' +
@@ -100,6 +114,7 @@ $("code").html(
   pad(val6.toString(16)) + ' ' +
   pad((val7 >> 8).toString(16)) + ' ' +
   pad(val7.toString(16)) + ' ' +
+  pad(val8.toString(16)) + ' ' +
   ' 7f');
 
 })
