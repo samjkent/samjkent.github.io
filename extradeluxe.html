@@ -46,8 +46,14 @@ input[type="range"] {
   <input id="pitchMoveMin" type="number" value="40" />
   </p>
   <p>
-  If the dial was between 0 and 1 the max and min are how far it can physically travel.
-  To calculate the physical limit of the dial, enter 0 for the minimum and 1.0 for the maximum. Take note of the pitch value at the limits, and then enter them here.
+  Pitch and Mod wheels can be calibrated by sending the following command. After sending this command the pitch and mod outputs are disabled, and the keyboard will keep track of the highest and lowest values reached by each wheel.
+  <code>
+  sendmidi dev "MODULE 01" hex syx 11 22 44 01
+  </code>
+  Disable calibration mode with (note the final byte is 00 OFF or 01 ON):
+  <code>
+  sendmidi dev "MODULE 01" hex syx 11 22 44 00
+  </code>
   </p>
   <p>
   Pitch Min
@@ -61,8 +67,6 @@ input[type="range"] {
   Mod
   </h2>
    <p>
-  If the dial was between 0 and 1 the max and min are how far it can physically travel.
-  To calculate the physical limit of the dial, enter 0 for the minimum and 1.0 for the maximum. Take note of the pitch value at the limits, and then enter them here.
   </p>
   <p>
   Mod Min
@@ -86,7 +90,7 @@ input[type="range"] {
 </p>
 <br />
 </div>
-<code>
+<code id="code">
 sendmidi
 </code>
 
@@ -113,7 +117,7 @@ $("#inputs").on("change", function(){
   let val8 = $('select[name="curve"]').val();
 
 
-$("code").html(
+$("#code").html(
   'sendmidi dev "MODULE 01" hex syx 11 22 33 ' +
 
   splitByte(val1) +
